@@ -52,26 +52,25 @@ module.exports = function(sequelize, DataTypes) {
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(user.password, salt);
       }
-    },
-    classMethods: {
-      associate: (models) => {
-        User.hasMany(models.Bookmark, {
-          foreignKey: 'UserId'
-        });
-      }
-    },
-    instanceMethods: {
-    /**
-     * verify plain password against user's hashed password
-     * @method
-     * @param {String} password password to be encrypted
-     * @returns {Boolean} Validity of passowrd
-     */
-      passwordMatched(password) {
-        return bcrypt.compareSync(password, this.password);
-      }
-    },
+    }
   });
+
+  User.associate = (models) => {
+      User.hasMany(models.Bookmark, {
+        foreignKey: 'UserId'
+      });
+  };
+
+  /**
+   * verify plain password against user's hashed password
+   * @method
+   * @param {String} password password to be encrypted
+   * @returns {Boolean} Validity of passowrd
+   */
+  User.prototype.passwordMatched = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
   sequelize.sync();
 
   return User;

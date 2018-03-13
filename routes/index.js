@@ -1,5 +1,5 @@
 const path = require('path');
-const bookmarksRoute = require('./bookmark');
+const BookmarksRoute = require('./bookmark');
 const UsersRoute = require('./user');
 
 

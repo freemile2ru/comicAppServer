@@ -12,14 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       allowNull: false,
     }
-  }, {
-    classMethods: {
-      associate: (models) => {
-        Bookmark.belogsTo(models.User, {
-          foreignKey: 'UserId'
-        });
-      }
-    }
   });
+
+  Bookmark.associate = (models) => {
+    Bookmark.belongsTo(models.User, {
+      foreignKey: 'UserId'
+    });
+  }
   return Bookmark;
 };

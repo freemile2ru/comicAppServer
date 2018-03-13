@@ -28,10 +28,10 @@ class UserController {
    * @param{Object} res - Server res
    * @returns{Void} return Void
    */
-  async static createUser (req, res) {
+  static async createUser (req, res) {
     try{
       if (UserController.postreq(req)) {
-        const newUser = await Users.create(req.body);
+        const newUser = await User.create(req.body);
         return res.status(201).send({
           success: true,
           message: 'User successfully signed up',
@@ -57,7 +57,7 @@ class UserController {
    * @param{Object} res - Server res
    * @returns{Void} return Void
    */
- async static loginUser(req, res) {
+ static async loginUser(req, res) {
    const user = await User.getUser(req.body.username);
    if (user && user.passwordMatched(req.body.password)) {
     const token = Authenticator.generateToken(user);
