@@ -7,8 +7,8 @@ module.exports = {
     where: {
       $or:
         [
-          {  email: userDetail },
-          {   username: userDetail },
+          { email: userDetail },
+          { username: userDetail },
           { UserId, }
         ]
     }

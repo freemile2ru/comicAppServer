@@ -46,7 +46,8 @@ class Authenticator {
   static generateToken(user) {
     return jwt.sign({
       userId: user.id,
-      user: user.username
+      username: user.username,
+      email: user.email
     }, SECRET_KEY);
   }
 }
