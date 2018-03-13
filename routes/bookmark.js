@@ -1,6 +1,12 @@
-const  express = require('express');
-const  UserController = require('../controllers/user');
-const  Authenticator = require('../middlewares/authenticator');
+const express = require('express');
+const BookmarkController = require('../controllers/bookmark');
+const Authenticator = require('../middlewares/authenticator');
 const router = express.Router();
 
+
+router.route('/')
+  .post(Authenticator.authenticateUser, BookmarkController.addBookmark)
+  .get(Authenticator.authenticateUser, BookmarkController.getBookmarks)
+  .delete(Authenticator.authenticateUser, BookmarkController.deleteBookmark)
+  
 module.exports = router

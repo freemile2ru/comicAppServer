@@ -1,7 +1,7 @@
 const path = require('path');
 const BookmarksRoute = require('./bookmark');
 const UsersRoute = require('./user');
-
+const ComicsRoute = require('./comic');
 
 /**
  * IndexRoute contains all the routes for the api
@@ -34,7 +34,16 @@ class IndexRoute {
  * @return{Void} return void
  */
   static Bookmarks(app) {
-    app.use('/api/documents', BookmarksRoute);
+    app.use('/api/bookmarks', BookmarksRoute);
+  }
+
+  /**
+ * Comics Route
+ * @param{Object} app express app
+ * @return{Void} return void
+ */
+  static Comics(app) {
+    app.use('/api/comics', ComicsRoute);
   }
 
 }

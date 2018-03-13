@@ -10,11 +10,12 @@ const app = express();
 
 // Log requests to the console.
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
-routes.Bookmarks(app)
+routes.Bookmarks(app);
 routes.Users(app);
+routes.Comics(app);
 routes.Index(app);
 
 const port = process.env.PORT || 4000;

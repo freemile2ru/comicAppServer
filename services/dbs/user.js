@@ -1,4 +1,4 @@
-const DB = require ('../models');
+const DB = require ('../../models');
 const User =  DB.User;
 
 module.exports = {

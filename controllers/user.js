@@ -2,7 +2,7 @@
 /* eslint import/no-unresolved: 0 */
 
 const Authenticator = require('../middlewares/authenticator');
-const User = require('../dbs/user')
+const User = require('../services/dbs/user')
 
 /**
  * Controller for Users

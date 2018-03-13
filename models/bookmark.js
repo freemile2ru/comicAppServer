@@ -4,19 +4,20 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     comic: {
       type: DataTypes.TEXT,
-      get: () => { 
+      get: function(){ 
         return JSON.parse(this.getDataValue('comic'));
       },
-      set: (value) => {
+      set: function(value){
         return this.setDataValue('comic', JSON.stringify(value));
       },
       allowNull: false,
+      unique: true
     }
   });
 
   Bookmark.associate = (models) => {
     Bookmark.belongsTo(models.User, {
-      foreignKey: 'UserId'
+      foreignKey: 'userId'
     });
   }
   return Bookmark;
