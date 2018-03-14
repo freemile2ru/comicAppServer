@@ -44,7 +44,8 @@ class UserController {
       });
     }
     catch(error){
-      return res.status(400).send({
+      console.log(error.errors[0].message)
+      return res.send({
         success: false,
         message: error.errors[0].message
       });
@@ -66,9 +67,9 @@ class UserController {
         token,
       });
     } else {
-      res.status(403).send({
+      res.send({
         success: false,
-        message: 'Failed to Authenticator User, Invalid Credentials'
+        message: 'Invalid Credentials'
       });
     }
   }

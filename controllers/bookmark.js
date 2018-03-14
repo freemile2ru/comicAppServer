@@ -19,6 +19,7 @@ class BookmarkController {
     try {
       const bookmark = await Bookmark.findOne(JSON.stringify(req.body.comic))
       if(!bookmark){
+        console.log(req.body)
         const newBookmark = await Bookmark.add(req.body);
         const bookmarks = await Bookmark.getByUserId(req.body.userId);
         return res.status(201).send({
@@ -26,7 +27,7 @@ class BookmarkController {
             bookmarks,
         })
       }
-      return res.status(400).send({
+      return res.send({
         success: false,
         message: 'bookmark already exist',
       })
@@ -47,7 +48,7 @@ class BookmarkController {
    */
   static async getBookmarks (req, res) {
     try {
-        const bookmarks = await Bookmark.getByUserId(req.body.userId);
+        const bookmarks = await Bookmark.getByUserId(req.query.userId);
         return res.status(200).send({
           success: true,
           bookmarks,
@@ -56,7 +57,7 @@ class BookmarkController {
     catch(error){
       return res.status(400).send({
         success: false,
-        message: error.errors[0].message
+        message: error.message
       });
     }
   }
@@ -68,9 +69,10 @@ class BookmarkController {
    * @returns{Void} return Void
    */
   static async deleteBookmark (req, res) {
+    const user = req.decoded
     try {
-        await Bookmark.deleteOne(req.body.id)
-        const bookmarks = await Bookmark.getByUserId(req.body.userId);
+        await Bookmark.deleteOne(req.params.id)
+        const bookmarks = await Bookmark.getByUserId(user.userId);
         return res.status(202).send({
           success: true,
           bookmarks,
@@ -79,7 +81,7 @@ class BookmarkController {
     catch(error){
       return res.status(400).send({
         success: false,
-        message: error.errors[0].message
+        message: error.message
       });
     }
   }

@@ -2,6 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors')
+
 const routes = require('./routes');
 
 
@@ -9,6 +11,7 @@ const routes = require('./routes');
 const app = express();
 
 // Log requests to the console.
+app.use(cors())
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

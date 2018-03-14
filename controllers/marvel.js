@@ -10,14 +10,14 @@ const Marvel = require('../services/marvel')
 class MarvelController {
  static async getComics(req, res){
      try {
-      const comics = await Marvel.getComics();
-      return res.status(201).send({
+      const comics = await Marvel.getComics(req.query.page);
+      return res.status(200).send({
         success: true,
         comics,
       })
      }
      catch(error){
-      return res.status(400).send({
+      return res.send({
         success: false,
         message: error
       });
